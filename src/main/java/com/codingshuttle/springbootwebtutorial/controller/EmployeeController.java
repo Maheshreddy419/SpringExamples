@@ -2,6 +2,7 @@ package com.codingshuttle.springbootwebtutorial.controller;
 
 import com.codingshuttle.springbootwebtutorial.dto.EmployeeDTO;
 import com.codingshuttle.springbootwebtutorial.entity.EmployeeEntity;
+import com.codingshuttle.springbootwebtutorial.exceptions.ResourceNotFoundException;
 import com.codingshuttle.springbootwebtutorial.services.EmployeeService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -37,7 +39,7 @@ public class EmployeeController {
             Optional<EmployeeDTO> employeeDTO  =employeeService.findById(Id);
               return employeeDTO
                       .map(ResponseEntity::ok)
-                      .orElse(ResponseEntity.notFound().build());
+                      .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id "+Id));
     }
 
     @GetMapping

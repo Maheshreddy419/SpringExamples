@@ -35,7 +35,7 @@ public class EmployeeDTO {
     @Positive(message = "That the salary of the employee should be positive")
     @Digits(integer = 6, fraction = 3, message = "The salary can be in the form of xcxcxc.ewe" )
     @DecimalMin(value = "100.22")
-    @DecimalMax(value = "100000.99")
+    @DecimalMax(value = "199999.99")
     private Double salary;
 
     @PastOrPresent(message = "The employee date of joining either path or present date")
